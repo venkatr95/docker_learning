@@ -14,6 +14,7 @@ A container is a standard unit of software that packages an application with all
 | *docker images*                               | To list available image in local machine  |
 | *docker search image*                         | Search available the image on DockerHub repositories  |
 | *docker pull image*                           | Pull an image from a registry             |
+| *docker push image*                           | Push an image to a registry             |
 | *docker ps*                                   | Shows running containers              |
 | *docker ps -a*                                | Show all container process including: running, stopped, etc |
 | *docker build -t name:tag .*                  | Build the image with specific name and tag |
