@@ -1,0 +1,21 @@
+stages:
+  - build
+
+variables:
+  # Define your Docker image name and registry here
+  DOCKER_IMAGE_NAME: my-cpp-app
+  DOCKER_USERNAME: ${DOCKER_USERNAME}
+  DOCKER_PASSWORD: ${DOCKER_PASSWORD}
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKER_USERNAME\",\"password\":\"$DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile Dockerfile --destination $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$CI_COMMIT_SHA
+  only:
+    - main  # You can specify which branches trigger this job
+
